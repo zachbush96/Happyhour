@@ -43,7 +43,7 @@
             <ul id='events'>
             </ul>
             <script>
-                let response = fetch('http://localhost:3000/api/events')
+                let response = fetch('happyhourclarksville.herokuapp.com/api/events')
                     .then(response => (response.json()))
                     .then(data => {
                         const ul = document.getElementById('events');
