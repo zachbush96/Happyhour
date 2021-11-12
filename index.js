@@ -3,9 +3,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var app = express();
-var jsonParser = bodyParser.json()
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-app.listen(3000, () => {
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
     console.log('listening on port 3000');
 });
 
