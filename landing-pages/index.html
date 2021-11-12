@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>Happyhour</title>
+        <style>
+            html, body {
+                padding:0;
+                margin:0;
+                height:100%;
+            }
+            body {
+                width:100%;
+            }
+            .row {
+                width:100%;
+                height:50%; 
+                
+            }
+            #bottomhalf{
+                text-align: center;
+            }
+            .row div {
+                width: 50%;
+                height: 100%;
+                float:left;
+            }
+            ul {
+                list-style-type: none;
+                margin: 10px o;
+                padding: 0;
+                height: 100%;
+                overflow-y: scroll;
+            }
+            li {
+                padding: 10px;
+            }
+            b {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="row" id="topHalf">
+            <ul id='events'>
+            </ul>
+            <script>
+                let response = fetch('http://localhost:3000/api/events')
+                    .then(response => (response.json()))
+                    .then(data => {
+                        const ul = document.getElementById('events');
+                        console.log("Data Returned from server: " + data);
+                        for(var i = 0; i < Object.keys(data).length; i++) {
+                            console.log(data[i]);
+                            const li = document.createElement('li');
+                            li.innerHTML = "<b>"+data[i]["name"] + " - " + data[i]["place"] + "</b>" + "<br />" 
+                            + data[i]["weekday"] + " - " + data[i]["frequency"]  + " - " +  data[i]["time"]
+                            + "<br />" + data[i]["description"];
+                            ul.appendChild(li);
+                        } 
+                    });                   
+            </script>
+
+        </div>
+        
+        <div class="row" id="bottomHalf">
+            Done see what your looking for? Submit a request below!
+
+            <form action="api/createEvent" method="POST">
+                <input type="text" name="name" placeholder="Event Name">
+                <input type="text" name="place" placeholder="Location">
+                <input type="text" name="location" placeholder="Address">
+                <input type="text" name="frequency" placeholder="Frequency">
+                <input type="text" name="weekday" placeholder="Weekday">
+                <input type="text" name="time" placeholder="Time">
+                <input type="text" name="description" placeholder="Description">
+                <input type="submit" value="Submit">
+            </form>
+
+        </div>
+    </body>
+</html>
